@@ -5,7 +5,7 @@ export const staffData: Staff[] = [
         id: 1,
         name: 'Royal Salon',
         role: 'Hair & Makeup',
-        avatar: 'staff/salon.jpg',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
     },
     {
       id: 2,

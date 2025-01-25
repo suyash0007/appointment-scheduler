@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Calendar, Clock, Users, Bell, Menu, ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import { staffData } from "@/store/staffData";
 
 interface SidebarLayoutProps {
@@ -15,7 +15,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
+  
   const navItems = [
     { icon: Calendar, label: "Scheduler" },
     { icon: Clock, label: "Previous Bookings" },
@@ -25,14 +25,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
 
   return (
     <div className="flex h-screen bg-background">
-      {/* Overlay for mobile only */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-background/80 backdrop-blur-sm md:hidden"
-          onClick={toggleSidebar}
-        />
-      )}
-
+  
       {/* Sidebar */}
       <aside
         className={cn(
@@ -188,14 +181,10 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
       {/* Main Content */}
       <div className="flex flex-1 flex-col transition-all duration-300 ease-in-out">
         {/* Mobile Header */}
-        <header className="sticky top-0 z-40 border-b border-border bg-card px-4 py-3 md:hidden">
-          <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-            <Menu className="h-5 w-5" />
-          </Button>
-        </header>
+        
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-auto bg-background p-4">
+        <main className="flex-1 overflow-auto bg-background ">
           {children}
         </main>
       </div>

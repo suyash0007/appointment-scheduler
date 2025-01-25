@@ -38,12 +38,12 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-screen">
       <SidebarLayout>
         <Header selectedDate={selectedDate} onDateChange={handleDateChange} />
         <main className="flex-1 overflow-hidden">
-          <div className="h-full py-6">
-            <div className="h-[calc(100vh-150px)] overflow-y-auto">
+          <div className="h-full">
+            <div className="h-[calc(100vh-100px)] overflow-y-auto">
               <CalendarGrid appointments={appointments} />
             </div>
           </div>
