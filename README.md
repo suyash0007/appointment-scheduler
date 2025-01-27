@@ -29,7 +29,7 @@ A modern, responsive appointment scheduling system built with Next.js and Tailwi
 
 1. Clone the repository:
    ```bash
-   git clone [appointment-scheduler](https://github.com/suyash0007/appointment-scheduler)
+   git clone https://github.com/suyash0007/appointment-scheduler
    cd appointment-scheduler
    ```
 
