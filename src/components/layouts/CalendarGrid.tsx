@@ -99,7 +99,7 @@ export function CalendarGrid({
           </Button>
         ))}
       </div>
-      <div className="relative p-2 sm:p-4 ml-5 sm:ml-0">
+      <div className="relative p-2 sm:p-4 ml-10 sm:ml-0">
         {timeSlots.map((timeSlot) => (
           <div key={timeSlot} className="relative">
             <div className="absolute left-0 top-0 -translate-y-1/2 text-xs sm:text-sm text-muted-foreground w-14 sm:w-24">
