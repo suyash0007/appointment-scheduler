@@ -8,7 +8,7 @@ import { Appointment } from "../../types/appointment";
 
 interface CalendarGridProps {
   appointments: Appointment[];
-  showAll: boolean; // New prop to toggle all appointments
+  showAll: boolean;
   onResetShowAll: () => void;
 }
 
