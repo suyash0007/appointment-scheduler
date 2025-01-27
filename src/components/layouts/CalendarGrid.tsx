@@ -12,14 +12,18 @@ interface CalendarGridProps {
   onResetShowAll: () => void;
 }
 
-export function CalendarGrid({ appointments, showAll, onResetShowAll }: CalendarGridProps) {
+export function CalendarGrid({
+  appointments,
+  showAll,
+  onResetShowAll,
+}: CalendarGridProps) {
   const timeSlots = generateTimeSlots();
   const [showCompleted, setShowCompleted] = useState(true);
   const [showBooked, setShowBooked] = useState(true);
   const [showCancelled, setShowCancelled] = useState(true);
 
   const toggleCardStatus = (status: string) => {
-    onResetShowAll(); 
+    onResetShowAll();
     if (status === "Completed") {
       setShowCompleted(true);
       setShowBooked(false);
@@ -62,29 +66,28 @@ export function CalendarGrid({ appointments, showAll, onResetShowAll }: Calendar
       id: "1",
       status: "Completed",
       styles:
-        "border-2 border-[#11995B] bg-inherit text-white rounded-full ml-6 py-2 hover:bg-transparent hover:text-inherit",
+        "border-2 border-[#11995B] bg-inherit text-white rounded-full sm:ml-6  sm:py-2 px-2 hover:bg-transparent hover:text-inherit",
       circle: "fill-[#11995B] border-none text-[#11995B] mr-2",
     },
     {
       id: "2",
       status: "Booked",
       styles:
-        "border-2 border-[#6486FF] bg-inherit text-white rounded-full ml-6 py-2 hover:bg-transparent hover:text-inherit",
+        "border-2 border-[#6486FF] bg-inherit text-white rounded-full sm:ml-6 ml-2 sm:py-2 px-2 hover:bg-transparent hover:text-inherit",
       circle: "fill-[#6486FF] border-none text-[#6486FF] mr-2",
     },
     {
       id: "3",
       status: "Cancelled",
       styles:
-        "border-2 border-[#FE6464] bg-inherit text-white rounded-full ml-6 py-2 hover:bg-transparent hover:text-inherit",
+        "border-2 border-[#FE6464] bg-inherit text-white rounded-full sm:ml-6 ml-2 sm:py-2 px-2 hover:bg-transparent hover:text-inherit",
       circle: "fill-[#FE6464] border-none text-[#FE6464] mr-2",
     },
   ];
 
-
   return (
     <div className="flex-1 overflow-y-auto bg-[#1D1D1D]">
-      <div className="my-5">
+      <div className="my-5 flex justify-center sm:justify-start">
         {statusButtons.map((button) => (
           <Button
             className={button.styles}
@@ -96,7 +99,7 @@ export function CalendarGrid({ appointments, showAll, onResetShowAll }: Calendar
           </Button>
         ))}
       </div>
-      <div className="relative p-2 sm:p-4 ml-10 sm:ml-0">
+      <div className="relative p-2 sm:p-4 ml-5 sm:ml-0">
         {timeSlots.map((timeSlot) => (
           <div key={timeSlot} className="relative">
             <div className="absolute left-0 top-0 -translate-y-1/2 text-xs sm:text-sm text-muted-foreground w-14 sm:w-24">
