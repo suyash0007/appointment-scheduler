@@ -1,47 +1,52 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Calendar, Clock, Users, Bell, Menu, ChevronLeft } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import { staffData } from "@/store/staffData";
+import { Calendar, Clock, Users, Bell, ChevronLeft, X } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { staffData } from "@/store/staffData"
 
 interface SidebarLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
+  isSidebarOpen: boolean
+  toggleSidebar: () => void
 }
 
-export function SidebarLayout({ children }: SidebarLayoutProps) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-  
+export function SidebarLayout({ children, isSidebarOpen, toggleSidebar }: SidebarLayoutProps) {
   const navItems = [
     { icon: Calendar, label: "Scheduler" },
     { icon: Clock, label: "Previous Bookings" },
     { icon: Users, label: "Clients" },
     { icon: Bell, label: "Notifications" },
-  ];
+  ]
 
   return (
-    <div className="flex h-screen bg-background">
-  
+    <div className="flex h-screen">
+      {/* Overlay */}
+      {isSidebarOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" onClick={toggleSidebar} />}
       {/* Sidebar */}
       <aside
         className={cn(
           "fixed md:relative inset-y-0 left-0 z-50 bg-card shadow-lg transition-all duration-300 ease-in-out",
-          isSidebarOpen ? "w-64" : "w-36",
-          "border-r border-border",
-          "p-4"
+          "border-r border-border sm:p-4 p-2",
+          isSidebarOpen ? "translate-x-0 w-52 sm:w-64" : "-translate-x-full md:translate-x-0 sm:w-36"
         )}
       >
         <div className="flex h-full flex-col">
+          {/* Close button for mobile */}
+          <button
+            className="absolute top-4 right-4 p-2 rounded-full bg-background text-foreground md:hidden"
+            onClick={toggleSidebar}
+          >
+            <X className="h-6 w-6" />
+          </button>
           <div
             className={cn(
-              "flex items-center justify-between border-b border-border p-4",
+              "flex items-center justify-between border-b border-border p-4 sm:mt-0 mt-8",
               !isSidebarOpen && "justify-center p-1"
             )}
           >
+            <div className="flex items-center space-x-2 transition-all duration-300 ease-in-out">
             <div className="flex items-center space-x-2 transition-all duration-300 ease-in-out">
               <div className="flex items-center space-x-3">
                 <Avatar className={"h-12 w-12 rounded-lg"}>
@@ -53,6 +58,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
                     {staffData[0].name.slice(0, 2)}
                   </AvatarFallback>
                 </Avatar>
+                </div>
                 <div
                   className={cn(
                     "flex flex-col origin-left transition-all duration-300",
@@ -71,7 +77,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
           {/* Navigation */}
           <nav
             className={cn(
-              "flex-1 space-y-1 px-4 overflow-hidden mt-7",
+              "flex-1 space-y-1 sm:px-4 px-2 overflow-hidden mt-7",
               !isSidebarOpen && "px-2"
             )}
           >
@@ -110,8 +116,8 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
               </div>
             </div>
 
-            {/* Staff Section */}
-            <div className="py-2">
+             {/* Staff Section */}
+             <div className="py-2">
               <h2
                 className={cn(
                   "mb-2 px-2 text-xs font-semibold text-muted-foreground whitespace-nowrap transition-all duration-300",
@@ -161,6 +167,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
             </div>
           </nav>
 
+
           {/* Toggle Button */}
           <Button
             variant="default"
@@ -168,26 +175,17 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
             className="absolute -right-3 top-8 hidden md:flex h-6 w-6 bg-white text shadow-md rounded-full"
             onClick={toggleSidebar}
           >
-            <ChevronLeft
-              className={cn(
-                "h-4 w-4 transition-transform duration-300",
-                !isSidebarOpen && "rotate-180"
-              )}
-            />
+            <ChevronLeft className={cn("h-4 w-4 transition-transform duration-300", !isSidebarOpen && "rotate-180")} />
           </Button>
         </div>
       </aside>
 
       {/* Main Content */}
       <div className="flex flex-1 flex-col transition-all duration-300 ease-in-out">
-        {/* Mobile Header */}
-        
-
         {/* Main Content Area */}
-        <main className="flex-1 overflow-auto bg-background ">
-          {children}
-        </main>
+        <main className="flex-1 overflow-auto bg-background">{children}</main>
       </div>
     </div>
-  );
+  )
 }
+
